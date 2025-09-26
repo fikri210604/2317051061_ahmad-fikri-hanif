@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nama_mahasiswa');
             $table->string('nim');
-            $table->foreignId('kelas_id')->constrained('class');
+            $table->foreignId('kelas_id')->constrained('kelas');
         });
     }
 
