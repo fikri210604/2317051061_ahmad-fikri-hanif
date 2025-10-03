@@ -57,24 +57,36 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_mahasiswa' => 'required|string|max:255|unique:user,nama_mahasiswa',
+            'nim' => 'required|string|unique:user,nim',
+            'kelas_id' => 'required|integer'
+        ]);
+
         $this->user->create([
             'nama_mahasiswa' => $request->input('nama_mahasiswa'),
             'nim' => $request->input('nim'),
             'kelas_id' => $request->input('kelas_id')
         ]);
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'User berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)
     {
+        
+        $request->validate([
+            'nama_mahasiswa' => 'required|string|max:255|unique:user,nama_mahasiswa,' . $id,
+            'nim' => 'required|string|unique:user,nim,' . $id,
+            'kelas_id' => 'required|integer'
+        ]);
         $user = User::find($id);
         $user->update([
             'nama_mahasiswa' => $request->input('nama_mahasiswa'),
             'nim' => $request->input('nim'),
             'kelas_id' => $request->input('kelas_id')
         ]);
-        return redirect('/user');
+        return redirect('/user')->with('success', 'User berhasil diupdate');
     }
     public function delete($id)
     {

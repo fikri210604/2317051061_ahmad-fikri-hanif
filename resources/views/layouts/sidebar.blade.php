@@ -1,15 +1,12 @@
 <div x-data="{ open: true }" class="flex">
-  <!-- Sidebar -->
   <div class="flex flex-col bg-white border-r border-gray-200 transition-all duration-300"
        :style="open ? 'width:220px' : 'width:60px'" style="height: 100vh;">
 
-    <!-- Header (Logo + Toggle) -->
     <div class="flex items-center justify-between p-3">
       <a href="/" class="flex items-center text-gray-800 no-underline" x-show="open" x-transition>
         <i class="bi bi-grid text-xl me-2"></i>
         <span class="text-lg font-bold">Dashboard</span>
       </a>
-      <!-- Tombol Toggle (selalu tampil) -->
       <button @click="open = !open" class="btn btn-outline-secondary p-1">
         <i class="bi" :class="open ? 'bi-chevron-left' : 'bi-chevron-right'"></i>
       </button>
@@ -23,27 +20,27 @@
         <a href="{{ route('user.index') }}"
            class="flex items-center px-3 py-2 rounded-md
                   {{ request()->routeIs('user.index')
-                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
-                      : 'bg-white text-gray-800 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white' }}">
+                      ? 'bg-[#ffcc00] text-white'
+                      : 'bg-white text-gray-800 hover:bg-[#ffcd00] hover:text-white' }}">
           <i class="bi bi-people me-2"></i>
-          <span x-show="open" x-transition>Users</span>
+          <span x-show="open" x-transition>Mahasiswa</span>
         </a>
       </li>
       <li>
         <a href="#"
            class="flex items-center px-3 py-2 rounded-md
                   {{ request()->is('produk*')
-                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
-                      : 'bg-white text-gray-800 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white' }}">
+                      ? 'bg-[#ffcc00] text-white'
+                      : 'bg-white text-gray-800 hover:bg-[#ffcf00] hover:text-white' }}">
           <i class="bi bi-box me-2"></i>
-          <span x-show="open" x-transition>Produk</span>
+          <span x-show="open" x-transition></span>
         </a>
       </li>
       <li>
         <a href="#"
            class="flex items-center px-3 py-2 rounded-md
                   {{ request()->is('settings*')
-                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
+                      ? 'bg-[#ffcc00] text-white'
                       : 'bg-white text-gray-800 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white' }}">
           <i class="bi bi-gear me-2"></i>
           <span x-show="open" x-transition>Settings</span>
