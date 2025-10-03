@@ -11,8 +11,15 @@ class Kelas extends Model
 
     protected $table = 'kelas';
     protected $guarded = ['id'];
+    protected $fillable = ['kelas_id', 'nama_kelas'];
 
     public function user(){
         return $this->hasMany(User::class, 'kelas_id');
     }
+
+    public function getKelas(){
+        return $this->all();
+    }
+
+
 }

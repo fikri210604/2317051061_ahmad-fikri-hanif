@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MataKuliahController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +20,19 @@ Route::get('/', function () {
 });
 
 Route::get('/profile/{nama}/{npm}/{kelas}', [ProfileController::class, 'index'])->name('profile');
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/user',[UserController::class,'index'])->name('user.index');
+Route::post('/user',[UserController::class,'store'])->name('user.store');
+Route::put('/user/{id}',[UserController::class,'update'])->name('user.update');
+Route::delete('/user/{id}',[UserController::class,'delete'])->name('user.delete');
+
+
+Route::get('/mata-kuliah', [MataKuliahController::class, 'index'])->name('matakuliah.index');
+Route::post('/mata-kuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
+Route::put('/mata-kuliah/{id}', [MataKuliahController::class, 'update'])->name('matakuliah.update');
+Route::delete('/mata-kuliah/{id}', [MataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
+
