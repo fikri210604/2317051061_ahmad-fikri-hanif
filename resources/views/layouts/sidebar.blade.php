@@ -27,13 +27,13 @@
         </a>
       </li>
       <li>
-        <a href="#"
+        <a href="{{ route('matakuliah.index') }}"
            class="flex items-center px-3 py-2 rounded-md
-                  {{ request()->is('produk*')
+                  {{ request()->routeIs('matakuliah.index')
                       ? 'bg-[#ffcc00] text-white'
                       : 'bg-white text-gray-800 hover:bg-[#ffcf00] hover:text-white' }}">
           <i class="bi bi-box me-2"></i>
-          <span x-show="open" x-transition></span>
+          <span x-show="open" x-transition>Mata Kuliah</span>
         </a>
       </li>
       <li>
