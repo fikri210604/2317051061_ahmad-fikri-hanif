@@ -29,6 +29,11 @@ class MataKuliahController extends Controller
     }
 
     public function update(){
+        MataKuliah::find(request('id'))->update([
+            'nama_mk' => request('nama_mk'),
+            'sks' => request('sks')
+        ]);
+        return redirect()->to('/mata-kuliah');
     }
 
     public function destroy($id){
