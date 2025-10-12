@@ -12,11 +12,17 @@
       </button>
     </div>
 
+    <!-- Alert ketika sudah berhasil/tidak berhasil -->
+    @if (session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+    @endif
     <div id="tableData" class="overflow-x-auto bg-white shadow-lg rounded-lg">
       <table class="min-w-full text-sm text-left text-gray-600">
         <thead class="bg-[#ffcc00] text-white text-center">
           <tr>
-            <th class="px-6 py-3">ID</th>
+            <th class="px-6 py-3">Nomor</th>
             <th class="px-6 py-3">Nama Mata Kuliah</th>
             <th class="px-6 py-3">SKS</th>
             <th class="px-6 py-3">Aksi</th>
@@ -25,8 +31,7 @@
         <tbody id="mkTableBody" class="text-center">
           @foreach ($mks as $mk)
             <tr class="border-b hover:bg-indigo-50 transition">
-              <td class="px-6 py-4 font-medium text-gray-800">{{ $mk->id }}</td>
-              <td class="px-6 py-4">{{ $mk->nama_mk }}</td>
+              <td class="px-6 py-4 font-medium text-gray-800">{{ $loop->iteration }}</td>              <td class="px-6 py-4">{{ $mk->nama_mk }}</td>
               <td class="px-6 py-4">{{ $mk->sks }}</td>
               <td class="px-6 py-4">
                 <div class="flex justify-center gap-2">
@@ -40,6 +45,9 @@
               </td>
             </tr>
           @endforeach
+          <tr>
+            <td class="px-6 py-4 font-medium text-gray-800" colspan="5">Total SKS : {{ $totalSks }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -143,19 +151,19 @@
 @endsection
 
 @if ($errors->any())
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    @if (session('error_edit_id'))
-      var editModal = new bootstrap.Modal(
-        document.getElementById('modalEdit{{ session('error_edit_id') }}')
-      );
-      editModal.show();
-    @else
-      var tambahModal = new bootstrap.Modal(
-        document.getElementById('modalTambah')
-      );
-      tambahModal.show();
-    @endif
-  });
-</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      @if (session('error_edit_id'))
+        var editModal = new bootstrap.Modal(
+          document.getElementById('modalEdit{{ session('error_edit_id') }}')
+        );
+        editModal.show();
+      @else
+          var tambahModal = new bootstrap.Modal(
+          document.getElementById('modalTambah')
+        );
+        tambahModal.show();
+      @endif
+    });
+  </script>
 @endif

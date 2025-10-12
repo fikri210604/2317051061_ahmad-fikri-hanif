@@ -12,6 +12,9 @@ class MataKuliahController extends Controller
           'title' => 'Mata Kuliah',
           'mks' => MataKuliah::all() 
         ];
+
+        $totalSks = $data['mks']->sum('sks');
+        $data['totalSks'] = $totalSks;
         return view('list_mk', $data);
     }
 
@@ -20,24 +23,37 @@ class MataKuliahController extends Controller
             'title' => 'Create Mata Kuliah']);
     }
 
-    public function store(){
+    public function store(Request $request){
+        $request->validate([
+            'nama_mk' => 'required | alpha',
+            'sks' => 'required | numeric | min:1 | max:3'
+        ]);
         MataKuliah::create([
            'nama_mk' => request('nama_mk'),
            'sks' => request('sks')
         ]);
-        return redirect()->to('/mata-kuliah');
+        return redirect()->to('/mata-kuliah')->with('success', 'Mata kuliah berhasil ditambahkan');
     }
 
-    public function update(){
-        MataKuliah::find(request('id'))->update([
-            'nama_mk' => request('nama_mk'),
-            'sks' => request('sks')
+    public function update(Request $request, $id){
+        $request->validate([
+            'nama_mk' => 'required | alpha',
+            'sks' => 'required | numeric | min:1 | max:3'
         ]);
-        return redirect()->to('/mata-kuliah');
+        
+        $mk = MataKuliah::findOrFail($id);
+        $mk->update([
+            'nama_mk' => $request->input('nama_mk'),
+            'sks' => $request->input('sks')
+        ]);
+        
+        return redirect()->to('/mata-kuliah')->with('success', 'Mata kuliah berhasil diupdate');
     }
 
     public function destroy($id){
-        MataKuliah::find($id)->delete();
+        MataKuliah::findOrFail($id)->delete();
         return redirect()->to('/mata-kuliah');
     }
+
+
 }
