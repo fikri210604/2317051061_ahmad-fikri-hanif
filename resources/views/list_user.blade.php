@@ -28,11 +28,16 @@
       </form>
     </div>
 
+    @if (session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+    @endif
     <div id="tableData" class="overflow-x-auto bg-white shadow-lg rounded-lg">
       <table class="min-w-full text-sm text-left text-gray-600">
         <thead class="bg-[#ffcc00] text-white text-center">
           <tr>
-            <th class="px-6 py-3">ID</th>
+            <th class="px-6 py-3">Nomor</th>
             <th class="px-6 py-3">Nama</th>
             <th class="px-6 py-3">NIM</th>
             <th class="px-6 py-3">Kelas</th>
@@ -42,7 +47,7 @@
         <tbody id="userTableBody" class="text-center">
           @foreach ($users as $u)
             <tr class="border-b hover:bg-indigo-50 transition">
-              <td class="px-6 py-4 font-medium text-gray-800">{{ $u->id }}</td>
+              <td class="px-6 py-4 font-medium text-gray-800">{{ $loop->iteration }}</td>
               <td class="px-6 py-4">{{ $u->nama_mahasiswa }}</td>
               <td class="px-6 py-4">{{ $u->nim }}</td>
               <td class="px-6 py-4">
